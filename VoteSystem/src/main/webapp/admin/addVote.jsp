@@ -27,7 +27,7 @@
 </head>
 <body>
 
-	<form action="addVote" method="post" name="addForm">
+	<form action="addVoteAction" method="post" name="addForm">
 		选择投票频道 <select name="channel">
 			<option value="1">NBA</option>
 			<option value="2">CBA</option>

@@ -44,9 +44,9 @@ public class VoteDAOImpl implements VoteDAO {
 			ps.setString(1, name);
 			result = ps.executeQuery();
 			if (result.next()) {
-				vote.setVoteID(result.getInt(0));
-				vote.setVoteName(result.getString(1));
-				vote.setChannelID(result.getInt(2));
+				vote.setVoteID(result.getInt(1));
+				vote.setVoteName(result.getString(2));
+				vote.setChannelID(result.getInt(3));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
