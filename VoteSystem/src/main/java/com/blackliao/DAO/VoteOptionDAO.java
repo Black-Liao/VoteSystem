@@ -11,4 +11,9 @@ public interface VoteOptionDAO {
 	List<VoteOption> findVoteOptionByVoteID(int voteID);
 	
 	void deleteVoteOption(int voteOptionID);
+	
+	VoteOption findVoteOptionByID(int voteOptionID);
+	
+	void updateVoteOption(VoteOption voteOption);
+	
 }

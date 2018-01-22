@@ -141,6 +141,96 @@ public class VoteDAOImpl implements VoteDAO {
 			DBConnection.close(conn);
 		}
 		
+	}
+	
+	public int findCountByChannel(int channelID) {
+		
+		Connection conn = DBConnection.getConnection();
+		
+		String sql = "SELECT * FROM tb_vote WHERE channel_id=?";
+		
+		PreparedStatement ps = null;
+		ResultSet result = null;
+		int count = 0;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, channelID);
+			result = ps.executeQuery();
+			if (result.next()) {
+				count = result.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnection.close(result);
+			DBConnection.close(ps);
+			DBConnection.close(conn);
+		}
+		
+		return count;
+	}
+	
+	public List<Vote> findVoteByChannel(Page page, int channelID) {
+		
+		Connection conn = DBConnection.getConnection();
+		
+		String sql = "SELECT * FROM tb_vote WHERE channel_id=? LIMIT ?,? ";
+		PreparedStatement ps = null;
+		ResultSet result = null;
+		List<Vote> votes = new ArrayList<Vote>();
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, channelID);
+			ps.setInt(2, page.getBeginIndex());
+			ps.setInt(3, page.getEveryPage());
+			result = ps.executeQuery();
+			while (result.next()) {
+				Vote vote = new Vote();
+				vote.setVoteID(result.getInt(1));
+				vote.setVoteName(result.getString(2));
+				vote.setChannelID(result.getInt(3));
+				votes.add(vote);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnection.close(result);
+			DBConnection.close(ps);
+			DBConnection.close(conn);
+		}
+		
+		return votes;
 		
 	}
+	
+	public Vote findVoteByID(int voteID) {
+		
+		Connection conn = DBConnection.getConnection();
+		
+		String sql = "SELECT * FROM tb_vote WHERE vote_id=? ";
+		PreparedStatement ps = null;
+		ResultSet result = null;
+		Vote vote = new Vote();
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, voteID);
+			result = ps.executeQuery();
+			while (result.next()) {
+				vote.setVoteID(result.getInt(1));
+				vote.setVoteName(result.getString(2));
+				vote.setChannelID(result.getInt(3));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnection.close(result);
+			DBConnection.close(ps);
+			DBConnection.close(conn);
+		}
+		
+		return vote;
+	}
+	
 }

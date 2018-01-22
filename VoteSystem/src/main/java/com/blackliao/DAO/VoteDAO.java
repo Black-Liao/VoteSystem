@@ -16,4 +16,10 @@ public interface VoteDAO {
 	List<Vote> findAllVote(Page page);
 	
 	void deleteVote(int voteID);
+	
+	int findCountByChannel(int channelID);
+	
+	List<Vote> findVoteByChannel(Page page, int channelID);
+	
+	Vote findVoteByID(int VoteID);
 }

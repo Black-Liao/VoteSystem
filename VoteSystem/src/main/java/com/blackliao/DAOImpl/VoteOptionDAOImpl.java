@@ -57,6 +57,10 @@ public class VoteOptionDAOImpl implements VoteOptionDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			DBConnection.close(result);
+			DBConnection.close(ps);
+			DBConnection.close(conn);
 		}
 		return voteOptions;
 	}
@@ -81,5 +85,54 @@ public class VoteOptionDAOImpl implements VoteOptionDAO {
 		}
 		
 	}
+	
+	public VoteOption findVoteOptionByID(int voteOptionID) {
+		
+		Connection conn = DBConnection.getConnection();
+		String sql = "SELECT * FROM tb_voteoption WHERE voteoption_id=?";
+		
+		PreparedStatement ps = null;
+		ResultSet result = null;
+		VoteOption vo = new VoteOption();
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, voteOptionID);
+			result = ps.executeQuery();
+			while (result.next()) {
+				vo.setVoteOptionID(result.getInt(1));
+				vo.setVoteOptionName(result.getString(2));
+				vo.setVoteID(result.getInt(3));
+				vo.setTicketNum(result.getInt(4));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnection.close(result);
+			DBConnection.close(ps);
+			DBConnection.close(conn);
+		}
+		
+		return vo;
+	}
 
+	public void updateVoteOption(VoteOption voteOption) {
+		
+		Connection conn = DBConnection.getConnection();
+		String sql = "UPDATE tb_voteoption SET ticket_num=? WHERE voteoption_id=?";
+		
+		PreparedStatement ps = null;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, voteOption.getTicketNum());
+			ps.setInt(2, voteOption.getVoteOptionID());
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnection.close(ps);
+			DBConnection.close(conn);
+		}
+	}
+	
 }

@@ -8,7 +8,7 @@
     <!--  Overwrite Convention -->
   	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
 
-    <package name="com.blackliao.action" extends="struts-default">
+    <package name="addVote" extends="jfreechart-default">
         <action name="addVoteAction" class="com.blackliao.action.VoteAction" method="execute">
         	<result name="success">/admin/addVote.jsp</result>
 <!--         	<result name="error">/error.jsp</result> -->
@@ -20,6 +20,23 @@
         
         <action name="deleteVote" class="com.blackliao.action.DeleteVoteAction">
         	<result name="success" type="chain">showVoteAction</result>
+        </action>
+        
+        <action name="showVoteByChannelAction" class="com.blackliao.action.ShowVoteByChannelAction" >
+        	<result name="success">/index.jsp</result>
+        	<result name="input">/index.jsp</result>
+        </action>
+        
+        <action name="doVote" class="com.blackliao.action.DoVoteAction">
+        	<result name="success" type="chain">voteResult</result>
+        	<result name="input" type="chain">showVoteByChannelAction</result>
+        </action>
+        
+        <action name="voteResult" class="com.blackliao.action.VoteResultAction">
+        	<result name="success" type="chart">
+        		<param name="width">400</param>
+        		<param name="height">300</param>
+        	</result>
         </action>
     </package>
 </struts>
