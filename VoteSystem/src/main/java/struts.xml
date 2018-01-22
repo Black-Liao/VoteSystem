@@ -11,7 +11,15 @@
     <package name="com.blackliao.action" extends="struts-default">
         <action name="addVoteAction" class="com.blackliao.action.VoteAction" method="execute">
         	<result name="success">/admin/addVote.jsp</result>
-        	<result name="error">/error.jsp</result>
+<!--         	<result name="error">/error.jsp</result> -->
+        </action>
+        
+        <action name="showVoteAction" class="com.blackliao.action.ShowVoteAction" method="execute">
+        	<result name="success">/admin/showVote.jsp</result>
+        </action>
+        
+        <action name="deleteVote" class="com.blackliao.action.DeleteVoteAction">
+        	<result name="success" type="chain">showVoteAction</result>
         </action>
     </package>
 </struts>
