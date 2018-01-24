@@ -9,9 +9,9 @@ import java.sql.SQLException;
 public class DBConnection {
 
 	public static final String DBDRIVER = "com.mysql.jdbc.Driver";
-	public static final String DBURL = "jdbc:mysql://127.0.0.1:3306/db_votemanager";
+	public static final String DBURL = "jdbc:mysql://116.62.236.60:3306/db_votemanager";
 	public static final String DBUSER = "root";
-	public static final String DBPASSWORD = "root";
+	public static final String DBPASSWORD = "CZv=yu8Qg396";
 	
 	/**
 	 * 获取链接 获得数据库连接对象
