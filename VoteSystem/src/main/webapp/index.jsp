@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Vote Page</title>
 </head>
+<%@ include file="header.jsp" %>
 <body>
 	<s:iterator value="#request.voteResults" var="result">
 		<p class="style2">${result.vote.voteName }</p>
@@ -32,4 +33,5 @@
 	</s:if>
 
 </body>
+<%@ include file="footer.jsp" %>
 </html>
